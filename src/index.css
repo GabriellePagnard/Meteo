@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ajoute des styles personnalisés ici */
 body {
-  @apply bg-blue-500 text-white;
+  @apply bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500;
+  @apply text-white;
+  font-family: 'Roboto', sans-serif;
 }
 
-.weather-card {
-  @apply bg-white text-gray-900 rounded-lg p-6 shadow-md;
+input::placeholder {
+  @apply text-gray-400;
 }
