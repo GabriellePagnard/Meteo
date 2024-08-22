@@ -5,7 +5,8 @@ import Weather from "./weather";
 function App() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
-  const apiKey = "TON_API_KEY"; // Remplace par ta clé API OpenWeatherMap
+  const apiKey = import.meta.env.VITE_API_KEY;
+
 
   const fetchWeather = async () => {
     if (city === "") return;
