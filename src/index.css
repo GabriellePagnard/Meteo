@@ -1,0 +1,8 @@
+/* Ajoute des styles personnalisés ici */
+body {
+  @apply bg-blue-500 text-white;
+}
+
+.weather-card {
+  @apply bg-white text-gray-900 rounded-lg p-6 shadow-md;
+}
