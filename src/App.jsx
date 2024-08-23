@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Weather from "./weather";
 
 function App() {
@@ -6,8 +6,40 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const apiKey = import.meta.env.VITE_API_KEY;
 
+  // Vérifie et réinitialise le compteur à minuit chaque jour
+  useEffect(() => {
+    const now = new Date();
+    const lastRequestDate = localStorage.getItem("lastRequestDate");
+
+    if (lastRequestDate) {
+      const lastDate = new Date(lastRequestDate);
+      if (
+        lastDate.getDate() !== now.getDate() ||
+        lastDate.getMonth() !== now.getMonth() ||
+        lastDate.getFullYear() !== now.getFullYear()
+      ) {
+        // Réinitialise le compteur de requêtes si c'est un nouveau jour
+        localStorage.setItem("requestCount", 0);
+        localStorage.setItem("lastRequestDate", now);
+      }
+    } else {
+      // Initialise le stockage si ce n'est pas encore fait
+      localStorage.setItem("requestCount", 0);
+      localStorage.setItem("lastRequestDate", now);
+    }
+  }, []);
+
   const fetchWeather = async () => {
+    // Vérifie le nombre de requêtes effectuées aujourd'hui
+    const requestCount = parseInt(localStorage.getItem("requestCount"), 10);
+
+    if (requestCount >= 999) {
+      alert("Vous avez atteint la limite quotidienne de 999 requêtes à l'API.");
+      return;
+    }
+
     if (city === "") return;
+
     try {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=fr`
@@ -18,6 +50,9 @@ function App() {
         return;
       }
       setWeatherData(data);
+
+      // Incrémente le compteur de requêtes
+      localStorage.setItem("requestCount", requestCount + 1);
     } catch (error) {
       console.error("Erreur de récupération des données météo", error);
     }
@@ -32,13 +67,11 @@ function App() {
     <div className="bg-mobile sm:bg-desktop bg-cover bg-center h-screen w-screen">
       <div className="flex flex-col items-center justify-center min-h-screen">
         <div className="overlay-container bg-black bg-opacity-60 max-w-lg w-full p-6 rounded-lg shadow-lg backdrop-blur-lg">
-          {/* Supprimer l'animation du h1 */}
-          <h1 className="text-5xl font-extrabold text-white text-center mb-8">
+          <h1 className="text-5xl font-extrabold text-blue-300 text-center mb-8">
             🌤️ Météo 🌤️
           </h1>
           <form onSubmit={handleSubmit} className="mb-8 w-full">
             <div className="flex">
-              {/* Appliquer un contour bleu clair lors du focus */}
               <input
                 type="text"
                 value={city}

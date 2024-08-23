@@ -40,7 +40,7 @@ input::placeholder {
 }
 
 .bg-dark-blue {
-  background-color: #0D47A1; /* Bleu foncé */
+  background-color: #003a91; /* Bleu foncé */
 }
 
 .hover\:bg-light-blue:hover {
@@ -48,5 +48,5 @@ input::placeholder {
 }
 
 .hover\:text-dark-blue:hover {
-  color: #0D47A1; /* Texte bleu foncé au survol */
+  color: #003a91; /* Texte bleu foncé au survol */
 }
