@@ -3,11 +3,50 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500;
-  @apply text-white;
-  font-family: 'Roboto', sans-serif;
+  @apply bg-cover bg-no-repeat bg-center;
+  background-image: url('./assets/background.jpg');
+  background-size: cover; /* Cette propriété garantit que l'image couvre l'écran */
+  background-position: center;
+  background-attachment: fixed; /* Pour que l'image reste fixe lors du scroll */
+}
+
+/* Animation personnalisée pour un effet d'apparition douce */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
 }
 
 input::placeholder {
   @apply text-gray-400;
+}
+
+/* Styles pour le texte et le bouton */
+.text-brown {
+  color: #8B4513; /* Marron moyen */
+}
+
+.bg-overlay {
+  @apply bg-white bg-opacity-60 backdrop-blur-md; /* Cadre plus opaque */
+}
+
+.bg-dark-blue {
+  background-color: #0D47A1; /* Bleu foncé */
+}
+
+.hover\:bg-light-blue:hover {
+  background-color: #BBDEFB; /* Bleu clair au survol */
+}
+
+.hover\:text-dark-blue:hover {
+  color: #0D47A1; /* Texte bleu foncé au survol */
 }
