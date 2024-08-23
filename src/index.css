@@ -1,6 +1,9 @@
+@import "/node_modules/weather-icons/css/weather-icons.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 body {
   @apply bg-cover bg-no-repeat bg-center;

@@ -1,67 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Weather from "./weather";
+import { useDebounce } from "./hooks/useDebounce";
+import { useCitySuggestions } from "./hooks/useCitySuggestions";
+import { useWeatherData } from "./hooks/useWeatherData";
+import { useDailyReset } from "./hooks/useDailyReset";
 
 function App() {
   const [city, setCity] = useState("");
-  const [weatherData, setWeatherData] = useState(null);
+  const [selectedCity, setSelectedCity] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(true);
+  const debouncedCity = useDebounce(city, 500);
   const apiKey = import.meta.env.VITE_API_KEY;
 
-  // Vérifie et réinitialise le compteur à minuit chaque jour
-  useEffect(() => {
-    const now = new Date();
-    const lastRequestDate = localStorage.getItem("lastRequestDate");
+  useDailyReset();
 
-    if (lastRequestDate) {
-      const lastDate = new Date(lastRequestDate);
-      if (
-        lastDate.getDate() !== now.getDate() ||
-        lastDate.getMonth() !== now.getMonth() ||
-        lastDate.getFullYear() !== now.getFullYear()
-      ) {
-        // Réinitialise le compteur de requêtes si c'est un nouveau jour
-        localStorage.setItem("requestCount", 0);
-        localStorage.setItem("lastRequestDate", now);
-      }
-    } else {
-      // Initialise le stockage si ce n'est pas encore fait
-      localStorage.setItem("requestCount", 0);
-      localStorage.setItem("lastRequestDate", now);
-    }
-  }, []);
+  const { suggestions, loading: loadingSuggestions } = useCitySuggestions(
+    debouncedCity,
+    apiKey
+  );
+  const { weatherData, error, loading } = useWeatherData(selectedCity, apiKey);
 
-  const fetchWeather = async () => {
-    // Vérifie le nombre de requêtes effectuées aujourd'hui
-    const requestCount = parseInt(localStorage.getItem("requestCount"), 10);
-
-    if (requestCount >= 999) {
-      alert("Vous avez atteint la limite quotidienne de 999 requêtes à l'API.");
-      return;
-    }
-
-    if (city === "") return;
-
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=fr`
-      );
-      const data = await response.json();
-      if (data.cod === "404") {
-        alert("Ville non trouvée !");
-        return;
-      }
-      setWeatherData(data);
-
-      // Incrémente le compteur de requêtes
-      localStorage.setItem("requestCount", requestCount + 1);
-    } catch (error) {
-      console.error("Erreur de récupération des données météo", error);
-    }
+  const handleSelectCity = (city) => {
+    setCity(city.name);
+    setSelectedCity(city.name);
+    setShowSuggestions(false); // Masquer les suggestions après sélection
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchWeather();
+    if (!city) return;
+    setSelectedCity(city);
+    setShowSuggestions(false); // Masquer les suggestions après validation
   };
+
+  const handleInputChange = (e) => {
+    setCity(e.target.value);
+    setShowSuggestions(true); // Afficher les suggestions lors de la saisie
+  };
+
+  const uniqueSuggestions = suggestions.reduce((acc, current) => {
+    const x = acc.find(
+      (item) => item.name === current.name && item.country === current.country
+    );
+    if (!x) {
+      return acc.concat([current]);
+    } else {
+      return acc;
+    }
+  }, []);
 
   return (
     <div className="bg-mobile sm:bg-desktop bg-cover bg-center h-screen w-screen">
@@ -71,23 +57,41 @@ function App() {
             🌤️ Météo 🌤️
           </h1>
           <form onSubmit={handleSubmit} className="mb-6 sm:mb-8 w-full">
-            <div className="flex flex-col sm:flex-row">
+            <div className="relative flex">
               <input
                 type="text"
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
+                onChange={handleInputChange}
                 placeholder="Entrez une ville..."
-                className="p-3 sm:p-4 flex-grow rounded-t-lg sm:rounded-l-lg sm:rounded-t-none text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-400"
+                className="p-3 sm:p-4 flex-grow rounded-l-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-400"
               />
+              {loadingSuggestions && (
+                <p className="absolute top-full mt-2 text-sm text-gray-500">Chargement...</p>
+              )}
+              {!loadingSuggestions && showSuggestions && uniqueSuggestions.length > 0 && (
+                <ul className="absolute top-full left-0 mt-1 w-full bg-white text-gray-900 rounded-lg shadow-lg z-10">
+                  {uniqueSuggestions.map((suggestion, index) => (
+                    <li
+                      key={index}
+                      onClick={() => handleSelectCity(suggestion)}
+                      className="p-2 cursor-pointer hover:bg-blue-300"
+                    >
+                      {suggestion.name}, {suggestion.country}
+                    </li>
+                  ))}
+                </ul>
+              )}
               <button
                 type="submit"
-                className="bg-dark-blue text-white font-bold uppercase p-3 sm:p-4 rounded-b-lg sm:rounded-r-lg sm:rounded-b-none hover:bg-light-blue hover:text-dark-blue transition transform hover:scale-105"
+                className="bg-dark-blue text-white font-bold uppercase p-3 sm:p-4 rounded-r-lg hover:bg-light-blue hover:text-dark-blue transition transform hover:scale-105"
               >
                 Rechercher
               </button>
             </div>
           </form>
 
+          {loading && <p>Chargement...</p>}
+          {error && <p className="text-red-500">{error}</p>}
           {weatherData && <Weather data={weatherData} />}
         </div>
       </div>
