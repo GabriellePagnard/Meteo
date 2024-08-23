@@ -65,23 +65,23 @@ function App() {
 
   return (
     <div className="bg-mobile sm:bg-desktop bg-cover bg-center h-screen w-screen">
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="overlay-container bg-black bg-opacity-60 max-w-lg w-full p-6 rounded-lg shadow-lg backdrop-blur-lg">
-          <h1 className="text-5xl font-extrabold text-blue-300 text-center mb-8">
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-0">
+        <div className="overlay-container bg-black bg-opacity-60 max-w-lg w-full p-4 sm:p-6 rounded-lg shadow-lg backdrop-blur-lg">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-blue-300 text-center mb-6 sm:mb-8">
             🌤️ Météo 🌤️
           </h1>
-          <form onSubmit={handleSubmit} className="mb-8 w-full">
-            <div className="flex">
+          <form onSubmit={handleSubmit} className="mb-6 sm:mb-8 w-full">
+            <div className="flex flex-col sm:flex-row">
               <input
                 type="text"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="Entrez une ville..."
-                className="flex-grow p-4 rounded-l-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-400"
+                className="p-3 sm:p-4 flex-grow rounded-t-lg sm:rounded-l-lg sm:rounded-t-none text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-400"
               />
               <button
                 type="submit"
-                className="bg-dark-blue text-white font-bold uppercase p-4 rounded-r-lg hover:bg-light-blue hover:text-dark-blue transition transform hover:scale-105"
+                className="bg-dark-blue text-white font-bold uppercase p-3 sm:p-4 rounded-b-lg sm:rounded-r-lg sm:rounded-b-none hover:bg-light-blue hover:text-dark-blue transition transform hover:scale-105"
               >
                 Rechercher
               </button>
