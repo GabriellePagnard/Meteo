@@ -1,6 +1,9 @@
-// src/hooks/useDailyReset.js
 import { useEffect } from "react";
 
+/**
+ * Hook personnalisé pour réinitialiser les données de requêtes chaque jour.
+ * Utilise le stockage local pour suivre les requêtes effectuées et les réinitialiser au début de chaque nouvelle journée.
+ */
 export const useDailyReset = () => {
   useEffect(() => {
     const now = new Date();

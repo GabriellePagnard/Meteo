@@ -1,6 +1,11 @@
-// src/hooks/useWeatherData.js
 import { useState, useEffect } from "react";
 
+/**
+ * Hook personnalisé pour récupérer les données météo d'une ville spécifique.
+ * @param {string} city - Le nom de la ville.
+ * @param {string} apiKey - La clé API OpenWeatherMap.
+ * @returns {{weatherData: Object, error: string, loading: boolean}} Un objet contenant les données météo, l'erreur et l'indicateur de chargement.
+ */
 export const useWeatherData = (city, apiKey) => {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);

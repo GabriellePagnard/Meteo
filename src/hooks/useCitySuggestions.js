@@ -1,13 +1,18 @@
-// src/hooks/useCitySuggestions.js
 import { useState, useEffect } from "react";
 
+/**
+ * Hook personnalisé pour obtenir des suggestions de villes à partir de l'API OpenWeatherMap.
+ * @param {string} city - Le nom de la ville à rechercher.
+ * @param {string} apiKey - La clé API OpenWeatherMap.
+ * @returns {{suggestions: Array, loading: boolean}} Un objet contenant les suggestions de villes et un indicateur de chargement.
+ */
 export const useCitySuggestions = (city, apiKey) => {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (city.length < 3) {
-      setSuggestions([]); // Réinitialise les suggestions si moins de 3 lettres
+      setSuggestions([]); // Réinitialise les suggestions si moins de 3 lettres sont tapées
       return;
     }
 

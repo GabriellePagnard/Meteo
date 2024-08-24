@@ -2,13 +2,18 @@ import React from "react";
 import "weather-icons/css/weather-icons.css";
 import { useWeatherIcon } from "./hooks/useWeatherIcon";
 
+/**
+ * Composant d'affichage des données météo pour une ville donnée.
+ * @param {Object} props - Les propriétés du composant.
+ * @param {Object} props.data - Les données météo à afficher.
+ * @returns {JSX.Element} Le composant d'affichage de la météo.
+ */
 function Weather({ data }) {
   if (!data || !data.weather || data.weather.length === 0) {
     return <p>Impossible de récupérer les données météorologiques.</p>;
   }
 
   const iconClass = useWeatherIcon(data.weather[0].description);
-
   const roundedTemp = Math.round(data.main.temp);
 
   return (

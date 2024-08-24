@@ -1,4 +1,32 @@
-import React, { useState } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: App.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: App.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
 import Weather from "./weather";
 import { useDebounce } from "./hooks/useDebounce";
 import { useCitySuggestions } from "./hooks/useCitySuggestions";
@@ -61,7 +89,7 @@ function App() {
   // Filtre les suggestions pour qu'elles soient uniques
   const uniqueSuggestions = suggestions.reduce((acc, current) => {
     const x = acc.find(
-      (item) => item.name === current.name && item.country === current.country
+      (item) => item.name === current.name &amp;&amp; item.country === current.country
     );
     if (!x) {
       return acc.concat([current]);
@@ -71,53 +99,76 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-mobile sm:bg-desktop bg-cover bg-center h-screen w-screen">
-      <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-0">
-        <div className="overlay-container bg-black bg-opacity-60 max-w-lg w-full p-4 sm:p-6 rounded-lg shadow-lg backdrop-blur-lg">
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-blue-300 text-center mb-6 sm:mb-8">
+    &lt;div className="bg-mobile sm:bg-desktop bg-cover bg-center h-screen w-screen">
+      &lt;div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-0">
+        &lt;div className="overlay-container bg-black bg-opacity-60 max-w-lg w-full p-4 sm:p-6 rounded-lg shadow-lg backdrop-blur-lg">
+          &lt;h1 className="text-3xl sm:text-5xl font-extrabold text-blue-300 text-center mb-6 sm:mb-8">
             🌤️ Météo 🌤️
-          </h1>
-          <form onSubmit={handleSubmit} className="mb-6 sm:mb-8 w-full">
-            <div className="relative flex">
-              <input
+          &lt;/h1>
+          &lt;form onSubmit={handleSubmit} className="mb-6 sm:mb-8 w-full">
+            &lt;div className="relative flex">
+              &lt;input
                 type="text"
                 value={city}
                 onChange={handleInputChange}
                 placeholder="Entrez une ville..."
                 className="p-3 sm:p-4 flex-grow rounded-l-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-400"
               />
-              {loadingSuggestions && (
-                <p className="absolute top-full mt-2 text-sm text-gray-500">Chargement...</p>
+              {loadingSuggestions &amp;&amp; (
+                &lt;p className="absolute top-full mt-2 text-sm text-gray-500">Chargement...&lt;/p>
               )}
-              {!loadingSuggestions && showSuggestions && uniqueSuggestions.length > 0 && (
-                <ul className="absolute top-full left-0 mt-1 w-full bg-white text-gray-900 rounded-lg shadow-lg z-10">
+              {!loadingSuggestions &amp;&amp; showSuggestions &amp;&amp; uniqueSuggestions.length > 0 &amp;&amp; (
+                &lt;ul className="absolute top-full left-0 mt-1 w-full bg-white text-gray-900 rounded-lg shadow-lg z-10">
                   {uniqueSuggestions.map((suggestion, index) => (
-                    <li
+                    &lt;li
                       key={index}
                       onClick={() => handleSelectCity(suggestion)}
                       className="p-2 cursor-pointer hover:bg-blue-300"
                     >
                       {suggestion.name}, {suggestion.country}
-                    </li>
+                    &lt;/li>
                   ))}
-                </ul>
+                &lt;/ul>
               )}
-              <button
+              &lt;button
                 type="submit"
                 className="bg-dark-blue text-white font-bold uppercase p-3 sm:p-4 rounded-r-lg hover:bg-light-blue hover:text-dark-blue transition transform hover:scale-105"
               >
                 Rechercher
-              </button>
-            </div>
-          </form>
+              &lt;/button>
+            &lt;/div>
+          &lt;/form>
 
-          {loading && <p>Chargement...</p>}
-          {error && <p className="text-red-500">{error}</p>}
-          {weatherData && <Weather data={weatherData} />}
-        </div>
-      </div>
-    </div>
+          {loading &amp;&amp; &lt;p>Chargement...&lt;/p>}
+          {error &amp;&amp; &lt;p className="text-red-500">{error}&lt;/p>}
+          {weatherData &amp;&amp; &lt;Weather data={weatherData} />}
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
   );
 }
 
 export default App;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Weather">Weather</a></li><li><a href="global.html#useCitySuggestions">useCitySuggestions</a></li><li><a href="global.html#useDailyReset">useDailyReset</a></li><li><a href="global.html#useDebounce">useDebounce</a></li><li><a href="global.html#useWeatherData">useWeatherData</a></li><li><a href="global.html#useWeatherIcon">useWeatherIcon</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat Aug 24 2024 19:39:13 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
