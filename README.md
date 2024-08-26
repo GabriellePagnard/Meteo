@@ -23,21 +23,11 @@ Cette application vous permet de connaître la météo actuelle de n'importe que
 
 Voici à quoi ressemble l'application :   
 
-   
+![screenshot ordinateur demarrage](./screenshots/descktop_demarrage.jpeg)   
 
-<br>
-<br>
+![screenshot ordinateur suggestions](./screenshots/desktop_suggestion.jpg)   
 
-[Démo vidéo du projet sur ordinateur 🎥]()
-
-[Démo vidéo du projet sur mobile 🎥]()
-
-<br>
-<br>
-
-## 🌐 Lien direct
-
-Pour l'utiliser : [Météo🌤️]()   
+![screenshot ordinateur resultat](./screenshots/desktop_resultat.jpg)   
 
 <br>
 <br>
