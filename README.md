@@ -29,6 +29,19 @@ Voici à quoi ressemble l'application :
 
 ![screenshot ordinateur resultat](./screenshots/desktop_resultat.jpg)   
 
+![screenshot mobile demarrage](./screenshots/mobile_demarrage.jpg)   
+
+![screenshot mobile suggestions](./screenshots/mobile_suggestion.jpg)   
+
+![screenshot mobile resultat](./screenshots/mobile_resultat.jpg)   
+
+<br>
+<br>
+
+[Démo vidéo du projet sur ordinateur 🎥](https://www.youtube.com/watch?v=zGAOJx9SSo8)
+
+[Démo vidéo du projet sur mobile 🎥](https://www.youtube.com/watch?v=ClP1MwEVflw)
+
 <br>
 <br>
 
