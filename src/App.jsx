@@ -24,24 +24,16 @@ function App() {
     debouncedCity,
     apiKey
   );
-  
+
   // Récupère les données météo pour la ville sélectionnée
   const { weatherData, error, loading } = useWeatherData(selectedCity, apiKey);
 
-  /**
-   * Gère la sélection d'une ville dans les suggestions.
-   * @param {Object} city - L'objet ville sélectionné.
-   */
   const handleSelectCity = (city) => {
     setCity(city.name);
     setSelectedCity(city.name);
     setShowSuggestions(false); // Masquer les suggestions après sélection
   };
 
-  /**
-   * Gère la soumission du formulaire de recherche.
-   * @param {Event} e - L'événement de soumission du formulaire.
-   */
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!city) return;
@@ -49,16 +41,11 @@ function App() {
     setShowSuggestions(false); // Masquer les suggestions après validation
   };
 
-  /**
-   * Gère les changements de l'input de recherche.
-   * @param {Event} e - L'événement de changement de l'input.
-   */
   const handleInputChange = (e) => {
     setCity(e.target.value);
     setShowSuggestions(true); // Afficher les suggestions lors de la saisie
   };
 
-  // Filtre les suggestions pour qu'elles soient uniques
   const uniqueSuggestions = suggestions.reduce((acc, current) => {
     const x = acc.find(
       (item) => item.name === current.name && item.country === current.country
@@ -71,20 +58,20 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-mobile sm:bg-desktop bg-cover bg-center h-screen w-screen">
-      <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-0">
+    <div className="bg-mobile sm:bg-desktop bg-cover bg-center min-h-screen w-screen">
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6">
         <div className="overlay-container bg-black bg-opacity-60 max-w-lg w-full p-4 sm:p-6 rounded-lg shadow-lg backdrop-blur-lg">
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-blue-300 text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-blue-300 text-center mb-4 sm:mb-6">
             🌤️ Météo 🌤️
           </h1>
           <form onSubmit={handleSubmit} className="mb-6 sm:mb-8 w-full">
-            <div className="relative flex">
+            <div className="relative flex flex-col sm:flex-row">
               <input
                 type="text"
                 value={city}
                 onChange={handleInputChange}
                 placeholder="Entrez une ville..."
-                className="p-3 sm:p-4 flex-grow rounded-l-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-400"
+                className="p-3 sm:p-4 flex-grow rounded-t-lg sm:rounded-l-lg sm:rounded-r-none text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-400 w-full sm:w-auto"
               />
               {loadingSuggestions && (
                 <p className="absolute top-full mt-2 text-sm text-gray-500">Chargement...</p>
@@ -104,7 +91,7 @@ function App() {
               )}
               <button
                 type="submit"
-                className="bg-dark-blue text-white font-bold uppercase p-3 sm:p-4 rounded-r-lg hover:bg-light-blue hover:text-dark-blue transition transform hover:scale-105"
+                className="bg-dark-blue text-white font-bold uppercase p-3 sm:p-4 rounded-b-lg sm:rounded-l-none sm:rounded-r-lg hover:bg-light-blue hover:text-dark-blue transition transform hover:scale-105 w-full sm:w-auto"
               >
                 Rechercher
               </button>

@@ -13,7 +13,6 @@ body {
   background-attachment: fixed; /* Pour que l'image reste fixe lors du scroll */
 }
 
-/* Animation personnalisée pour un effet d'apparition douce */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -31,15 +30,6 @@ body {
 
 input::placeholder {
   @apply text-gray-400;
-}
-
-/* Styles pour le texte et le bouton */
-.text-brown {
-  color: #8B4513; /* Marron moyen */
-}
-
-.bg-overlay {
-  @apply bg-white bg-opacity-60 backdrop-blur-md; /* Cadre plus opaque */
 }
 
 .bg-dark-blue {
