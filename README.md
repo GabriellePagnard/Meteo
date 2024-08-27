@@ -32,6 +32,13 @@ Voici à quoi ressemble l'application :
 <br>
 <br>
 
+## 🌐 Lien direct
+
+Pour l'utiliser : [Météo🌤️](https://scintillating-cranachan-22bbc3.netlify.app)   
+
+<br>
+<br>
+
 ## 🔧 Technologies Utilisées
 
 ⚛️ React : La bibliothèque JavaScript pour construire des interfaces utilisateur dynamiques   
