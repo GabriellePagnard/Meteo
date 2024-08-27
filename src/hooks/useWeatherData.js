@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
  * @param {string} apiKey - La clé API OpenWeatherMap.
  * @returns {{weatherData: Object, error: string, loading: boolean}} Un objet contenant les données météo, l'erreur et l'indicateur de chargement.
  */
-export const useWeatherData = (city, apiKey) => {
+export const useWeatherData = (city) => {
+  const apiKey = import.meta.env.VITE_API_KEY; // Utilisation de la clé depuis .env
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);

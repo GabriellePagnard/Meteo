@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
  * @param {string} apiKey - La clé API OpenWeatherMap.
  * @returns {{suggestions: Array, loading: boolean}} Un objet contenant les suggestions de villes et un indicateur de chargement.
  */
-export const useCitySuggestions = (city, apiKey) => {
+export const useCitySuggestions = (city) => {
+  const apiKey = import.meta.env.VITE_API_KEY; // Utilisation de la clé depuis .env
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
