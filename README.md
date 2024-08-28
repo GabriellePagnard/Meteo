@@ -47,7 +47,7 @@ Voici à quoi ressemble l'application :
 
 ## 🌐 Lien direct
 
-Pour l'utiliser : [Météo🌤️](https://scintillating-cranachan-22bbc3.netlify.app)   
+Pour l'utiliser : [Météo🌤️](https://main--astounding-cupcake-5cd5e1.netlify.app/)   
 
 <br>
 <br>
